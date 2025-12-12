@@ -56,5 +56,13 @@ export const movementsData = [
     description: 'Retiro para gastos personales',
     amount: 100.00,
     date: '2025-12-08'
-  }
+  },
+  {
+  id: 9,
+  type: "fee",
+  description: "Comisión bancaria",
+  amount: 25.00,
+  date: "2025-12-09"
+}
+
 ];

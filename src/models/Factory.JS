@@ -1,18 +1,21 @@
-import { Deposit } from './Deposit';
-import { Withdrawal } from './Withdrawal';
-import { Transfer } from './Transfer';
-import { Payment } from './Payment';
+import { Deposit } from "./Deposit";
+import { Withdrawal } from "./Withdrawal";
+import { Transfer } from "./Transfer";
+import { Payment } from "./Payment";
+import { Fee } from "./Fee"; 
 
 export function createMovement(data) {
   switch (data.type) {
-    case 'deposit':
+    case "deposit":
       return new Deposit(data);
-    case 'withdrawal':
+    case "withdrawal":
       return new Withdrawal(data);
-    case 'transfer':
+    case "transfer":
       return new Transfer(data);
-    case 'payment':
+    case "payment":
       return new Payment(data);
+    case "fee":
+      return new Fee(data);
     default:
       throw new Error(`Unknown movement type: ${data.type}`);
   }
