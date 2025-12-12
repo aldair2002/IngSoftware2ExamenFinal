@@ -1,16 +1,40 @@
-# React + Vite
+###  Examen II Parcial 
+Refactorizacion con factory pattern y extensibilidad 
+El arhivo realizado describe la refactorizacion realizara par cumplir con los requrimientos que se han dicho en el examen que pues movimiento al dominio reduciendo el acoplamiento y demostrando la extensibilidad mediante OCP 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## QUE PASO 
 
-Currently, two official plugins are available:
+antes de la refactorizacion la UI tocaba objetos directamentes usando:
+new Deposit(...)
+new Withdrawal(...)
+switch (data.type) {...}
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Que Suitacion teniamos 
+-Alto acomplamiento porque la UI Dependia de clases concretas 
+-Baja cohesion la logica de creacion estaba mezclada con lo que se presentaba 
+-Dificultad para extender ya que un nuevo archico requeria editar la UI
 
-## React Compiler
+## Para mejora 
+ se creo el archivo dentro de models como Factory.js dentro de dominio 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## que usa la UI 
+ ahora solamente usa createMovement(data);
 
-## Expanding the ESLint configuration
+## Extensibilidad 
+Ahora si cumple con el principo de open y closed, para probarlo se agrego un nuevo tipo de movimiento FEE 
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Como lo creamos 
+Crear un archivo en models llamado Fee.js  y implementamos el movimiento heredado por la withdrawal 
+export class Fee extends Withdrawal {
+  getTypeName() {
+    return "Comisión";
+  }
+}
+y registramos un nuevo caso mas abajo que donde estaban abierto los casos
+    case "fee":
+  return new Fee(data);
+
+
+## instrucciones para ejecutar el proyecto seria  
+npm install
+npm run dev 
